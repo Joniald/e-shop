@@ -1,0 +1,20 @@
+#foot {
+ bottom:0;
+ z-index: -1;
+ background-color: rgba(0, 0, 0, 0.03); }
+body {
+ background-color: white;
+ margin-bottom: 520px; }
+.map-container-6{
+  overflow:hidden;
+  position:relative;
+  height:0; }
+.map-container-6 iframe{
+  height:100%;
+  width:100%;
+  position:absolute; }
+#imgl {
+ transition:1s;
+ }
+#imgl:hover{
+ transform: scale(1.02);}
