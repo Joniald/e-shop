@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/order',require('./routes/order'))
 app.use('/cloth',require('./routes/cloth'))
 app.use('/manufacturer',require('./routes/manufacturer'))
+app.use('/password',require('./routes/password'))
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

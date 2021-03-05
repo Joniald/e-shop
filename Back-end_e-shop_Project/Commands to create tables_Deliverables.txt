@@ -1,0 +1,37 @@
+CREATE DATABASE deliverables;
+
+CREATE TABLE manufacturer (id SERIAL PRIMARY KEY,
+name TEXT, country varchar(3), mlink01 TEXT NOT NULL, 
+mlink02 TEXT NOT NULL, mdescription TEXT, mshortdescription TEXT);
+
+
+CREATE TABLE cloth (id SERIAL PRIMARY KEY,
+code INT NOT NULL, clink TEXT NOT NULL,
+mshortdescription TEXT,
+description TEXT NOT NULL, promo INT NOT NULL, 
+price REAL NOT NULL, name TEXT);
+
+/*
+INSERT INTO cloth VALUES
+('1', '102332', 'https://i.ibb.co/Dw5NnJQ/Photo-6.webp', 'Hoodie in cut and sew block stripe with embroidery in blue.', ' ', '1', '37.99', 'Nike Dark Future'),
+('2', '802332', 'https://i.ibb.co/K7MYWfp/Photo-7.webp',  'We are a proud member of The Better Cotton Initiative. Better Cotton is sourced via a system of Mass Balance.', ' ', '1', '31.99', 'ASOS DF co-ord'),
+('3', '902332', 'https://i.ibb.co/4JBxCGg/Photo-8.webp', 'Scroll fresh loungewear and everyday jeans and T-shirts, or suit up in sharp tailoring, from smart shirts and shoes to suit jackets and trousers – just name the occasion.', ' ', '1', '64', 'River Island tapered jean'),
+('4', '1102332', 'https://i.ibb.co/cNd3qH4/Photo-9.webp', 'The inseam on these jeans measures 71cm. They’re a little shorter than normal. This sweet style is available in extended sizing!', ' ', '1',	'24.99', 'Classic rigid jeans'),
+('5', '302332', 'https://i.ibb.co/bWyKYnf/Photo-4.webp', 'Smooth faux leather. Matte finish. Body: 67% Viscose, 28% Nylon, 5% Elastane.', ' ', '1', '13.9', 'Plus faux leather'),
+('6', '502332',  'https://i.ibb.co/L51RFf5/Photo-2.webp', 'And it’s not all about the bottom half' with blouses, blazers, and dresses on offer in our Vero Moda at ASOS edit', ' ',  '1', '27.3', 'Vero Moda Curve leather'),
+('7', '402332', 'https://i.ibb.co/F4XDKWT/Photo-3.webp', 'Fresh on the streetwear scene, London-based label ASOS Dark Future brings a hint of minimalism', ' ', '0', '27.9', 'ASOS Dark Future');
+*/
+
+CREATE TABLE orderproduct (id SERIAL PRIMARY KEY,
+orderdate TEXT NOT NULL, cloth TEXT NOT NULL, quantity INT NOT NULL,
+customercode TEXT NOT NULL);
+
+CREATE EXTENSION pgcrypto;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL
+);
+
+//INSERT INTO users (email, password) VALUES ('johndoe@mail.com', crypt('johnspassword', gen_salt('bf')));
