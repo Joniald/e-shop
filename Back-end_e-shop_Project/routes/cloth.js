@@ -6,7 +6,7 @@ const client = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'deliverables',
-    password: '*********',
+    password: '****',
     port: 5432,
 })
 
@@ -69,6 +69,34 @@ router.post("/:id", (req, resp) => {
     });
 })
 
+/////////////////////////////ORDERABLE/////////////////////////////////////////
+
+router.get("/orderable/:id", (req, resp) => {
+  var RESPO = req.params.id;
+  console.log("Has been post the "+RESPO+" ID");
+  //console.log("In /attendee POST");
+  const myQuery = {
+        text: "SELECT cloth.id, manufacturer.country, manufacturer.name, cloth.price, cloth.code, cloth.clink, cloth.mshortdescription, manufacturer.mdescription FROM manufacturer INNER JOIN cloth ON manufacturer.name = cloth.name WHERE cloth.id = $1",
+        values: [req.params.id]
+    }
+    client
+    .query(myQuery)
+    .then((resuits) => {
+      console.log("Success!");
+      resp.writeHead(200, {
+                  "Content-Type": "api/json",
+                  "Access-Control-Allow-Origin": "*",
+      });
+      resp.write(JSON.stringify(resuits.rows));
+      resp.end();
+    })
+    .catch((error) => {
+      console.log("Ooops!");
+      console.log(error);
+          resp.send("An error....")
+    });
+})
+
 //////////////////////////////POST/////////////////////////////////////////////
 
 router.post("/", (req, resp) => {
@@ -95,12 +123,13 @@ router.post("/", (req, resp) => {
     });
 })
 
-/////////////////////////////////GET///////////////////////////////////////////
+/////////////////////////////////GET PROMO///////////////////////////////////////////
 
-router.get("/", (req, resp) => {
+router.get("/promo/", (req, resp) => {
     console.log("Success!");
     const myQuery = {
-        text: "SELECT * FROM cloth"
+        text: "SELECT * FROM cloth WHERE promo = $1",
+        values: [req.query.promo]
                     }
     client
     .query(myQuery)
@@ -118,6 +147,31 @@ router.get("/", (req, resp) => {
       console.log(error);
           resp.send("An error....")
     });
+})
+
+///////////////////////GET////////////////////////////////////
+
+router.get("/", (req, resp) => {
+  console.log("Success!");
+  const myQuery = {
+      text: "SELECT * FROM cloth",
+                  }
+  client
+  .query(myQuery)
+  .then((resuits) => {
+    resp.writeHead(200, {
+                "Content-Type": "api/json",
+                "Access-Control-Allow-Origin": "*",
+    });
+    resp.write(JSON.stringify(resuits.rows));
+    resp.end();
+
+  })
+  .catch((error) => {
+    console.log("Ooops!");
+    console.log(error);
+        resp.send("An error....")
+  });
 })
 
 ////////////////////SEARCH/////////////////////////////////////////////////////
