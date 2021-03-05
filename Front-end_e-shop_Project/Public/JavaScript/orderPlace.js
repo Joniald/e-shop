@@ -125,7 +125,7 @@ function postOrder() {
   req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   req.onload = () => {
     console.log("Data sent to the server");
-    loadFromServerManufacturer();
+    //loadFromServerManufacturer();
   }
   console.log("Sending data to the server");
   req.send("orderdate=" + d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
